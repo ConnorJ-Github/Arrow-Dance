@@ -38,36 +38,6 @@ life = 3
 #player input
 user_input = ''
 
-#draws the window & content
-def draw_window():
-
-        levels = 0; 
-        WIN.fill(BACKGROUND_CLR)
-
-        upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_up]),(ARROW_HEIGHT,ARROW_WIDTH))
-        WIN.blit(upArrow, (25, 200))
-
-        leftArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_left]),(ARROW_HEIGHT,ARROW_WIDTH))
-        leftArrow = pygame.transform.rotate(leftArrow, 90)
-        WIN.blit(leftArrow, (175, 200))
-
-        rightArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_right]),(ARROW_HEIGHT,ARROW_WIDTH))
-        rightArrow = pygame.transform.rotate(rightArrow, 270)
-        WIN.blit(rightArrow, (325, 200))
-
-        downArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_down]),(ARROW_HEIGHT,ARROW_WIDTH))
-        downArrow = pygame.transform.rotate(downArrow, 180)
-        WIN.blit(downArrow, (475, 200))
-
-        header_text = font.render('Match the Sequence', True, BLACK)
-        WIN.blit(header_text, (140,50))
-
-        player_score(score)
-        player_life(life)
-        draw_sequence()
-
-        pygame.display.update()
-
 
 #player life
 def player_life(life):
@@ -80,7 +50,15 @@ def player_score(score):
      WIN.blit(score_text, (0,0))
 
 
-#Game interaction
+def create_sequence():
+     
+     default_sequence = ["up","down","left","right"]
+     current_sequence = random.shuffle(default_sequence)
+     return current_sequence
+
+
+
+#draw the current sequence
 def draw_sequence(): #maybe try using a class?
 
      #to do
@@ -89,8 +67,6 @@ def draw_sequence(): #maybe try using a class?
      #have the array order randomly change
      #use that as the current sequence.
      #display the sequence to the display.
-
-
 
      image = "Assets/default_arrow.png"
      rotation = [0,90,180,270]
@@ -110,11 +86,6 @@ def draw_sequence(): #maybe try using a class?
      sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
      sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
      WIN.blit(sequence_four, (350,100))
-
-
-def random_action():
-     number = random.randrange(0,4)
-     return number
 
 
 
@@ -154,6 +125,37 @@ def update_arrow(mod, counter):
      counter += 1
 
      return act, counter
+
+#draws the window & content
+def draw_window():
+
+        levels = 0; 
+        WIN.fill(BACKGROUND_CLR)
+
+        upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_up]),(ARROW_HEIGHT,ARROW_WIDTH))
+        WIN.blit(upArrow, (25, 200))
+
+        leftArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_left]),(ARROW_HEIGHT,ARROW_WIDTH))
+        leftArrow = pygame.transform.rotate(leftArrow, 90)
+        WIN.blit(leftArrow, (175, 200))
+
+        rightArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_right]),(ARROW_HEIGHT,ARROW_WIDTH))
+        rightArrow = pygame.transform.rotate(rightArrow, 270)
+        WIN.blit(rightArrow, (325, 200))
+
+        downArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_down]),(ARROW_HEIGHT,ARROW_WIDTH))
+        downArrow = pygame.transform.rotate(downArrow, 180)
+        WIN.blit(downArrow, (475, 200))
+
+        header_text = font.render('Match the Sequence', True, BLACK)
+        WIN.blit(header_text, (140,50))
+
+        player_score(score)
+        player_life(life)
+        draw_sequence()
+
+        pygame.display.update()
+
 
 #Handles functions & other operations
         
