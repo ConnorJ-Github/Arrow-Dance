@@ -13,12 +13,10 @@ pygame.display.set_caption("Arrow-Dance")
 #The background colour of the window
 BACKGROUND_CLR = (255,255,255)
 
-
 #Colours
 BLACK = (0,0,0)
 
 #Font
-
 font = pygame.font.Font('Silkscreen-Regular.ttf',25)
 
 #Limits the FPS to 60
@@ -28,20 +26,17 @@ FPS = 60
 ARROW_HEIGHT, ARROW_WIDTH = 96,96
 
 #set up the images
-
 frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png','Assets/pink_arrow.png']
 active_frame_up, active_frame_down, active_frame_right, active_frame_left = 0, 0, 0, 0
 mode, mode1, mode2, mode3 = 0, 0, 0, 0
 count = 0
 
-#player score
-
+#player score & lives
 score = 0
+life = 3
 
-
-#player level
-
-level = 1
+#player input
+user_input = ''
 
 #draws the window & content
 def draw_window():
@@ -68,10 +63,16 @@ def draw_window():
         WIN.blit(header_text, (140,50))
 
         player_score(score)
+        player_life(life)
         create_sequence()
 
         pygame.display.update()
 
+
+#player life
+def player_life(life):
+     score_text = font.render(f'Lives: {life}', True, BLACK)
+     WIN.blit(score_text, (475,0))
 
 #player score
 def player_score(score):
@@ -80,26 +81,30 @@ def player_score(score):
 
 
 #Game interaction
-def create_sequence():
+def create_sequence(): #replace with a class
 
      image = "Assets/default_arrow.png"
-     direction = [0,90,180,270]
+     rotation = [0,90,180,270]
 
      sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_one = pygame.transform.rotate(sequence_one, direction[1])
+     sequence_one = pygame.transform.rotate(sequence_one, rotation[0])
      WIN.blit(sequence_one, (200,100))
 
      sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_two = pygame.transform.rotate(sequence_two, direction[0])
+     sequence_two = pygame.transform.rotate(sequence_two, rotation[3])
      WIN.blit(sequence_two, (250,100))
 
      sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_three = pygame.transform.rotate(sequence_three, direction[3])
+     sequence_three = pygame.transform.rotate(sequence_three, rotation[2])
      WIN.blit(sequence_three, (300,100))
 
      sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_four = pygame.transform.rotate(sequence_four, direction[2])
+     sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
      WIN.blit(sequence_four, (350,100))
+
+     current_sequence = []
+
+     return current_sequence
 
 
 def random_action():
