@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 pygame.init()
 
@@ -35,9 +36,6 @@ count = 0
 score = 0
 life = 3
 
-#player input
-user_input = ''
-
 
 #player life
 def player_life(life):
@@ -49,43 +47,41 @@ def player_score(score):
      score_text = font.render(f'Score: {score}', True, BLACK)
      WIN.blit(score_text, (0,0))
 
-
 def create_sequence():
-     
-     default_sequence = ["up","down","left","right"]
-     current_sequence = random.shuffle(default_sequence)
-     return current_sequence
+     global default_sequence
+     default_sequence = ["UP","DOWN","LEFT","RIGHT"]
+     random.shuffle(default_sequence)
 
 
-
+create_sequence()
 #draw the current sequence
 def draw_sequence(): #maybe try using a class?
 
-     #to do
+     x_axis = 150
 
-     #create an array ["up","down","left","right"]
-     #have the array order randomly change
-     #use that as the current sequence.
-     #display the sequence to the display.
+     for i in range(4):
+          sequence_text = font.render(default_sequence[i], True, BLACK)
+          WIN.blit(sequence_text, (x_axis,100))
+          x_axis += 100
 
-     image = "Assets/default_arrow.png"
-     rotation = [0,90,180,270]
+     # image = "Assets/default_arrow.png"
+     # rotation = [0,90,180,270]
 
-     sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_one = pygame.transform.rotate(sequence_one, rotation[0])
-     WIN.blit(sequence_one, (200,100))
+     # sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
+     # sequence_one = pygame.transform.rotate(sequence_one, rotation[0])
+     # WIN.blit(sequence_one, (200,100))
 
-     sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_two = pygame.transform.rotate(sequence_two, rotation[3])
-     WIN.blit(sequence_two, (250,100))
+     # sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
+     # sequence_two = pygame.transform.rotate(sequence_two, rotation[3])
+     # WIN.blit(sequence_two, (250,100))
 
-     sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_three = pygame.transform.rotate(sequence_three, rotation[2])
-     WIN.blit(sequence_three, (300,100))
+     # sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
+     # sequence_three = pygame.transform.rotate(sequence_three, rotation[2])
+     # WIN.blit(sequence_three, (300,100))
 
-     sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
-     sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
-     WIN.blit(sequence_four, (350,100))
+     # sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
+     # sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
+     # WIN.blit(sequence_four, (350,100))
 
 
 
@@ -152,6 +148,9 @@ def draw_window():
 
         player_score(score)
         player_life(life)
+
+        #controls if the sequence is drawn
+
         draw_sequence()
 
         pygame.display.update()
