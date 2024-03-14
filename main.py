@@ -1,5 +1,4 @@
 import pygame
-import os
 
 #set up the display
 WIDTH, HEIGHT = 600, 500
@@ -20,7 +19,10 @@ ARROW_HEIGHT, ARROW_WIDTH = 96,96
 #set up the images
 
 frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png','Assets/pink_arrow.png']
-active_frame = 0
+active_frame_up = 0
+active_frame_down = 0
+active_frame_right = 0
+active_frame_left = 0
 mode = 0
 count = 0
 
@@ -29,18 +31,18 @@ count = 0
 def draw_window(): 
         WIN.fill(BACKGROUND_CLR)
 
-        upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_up]),(ARROW_HEIGHT,ARROW_WIDTH))
         WIN.blit(upArrow, (25, 200))
 
-        leftArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        leftArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_left]),(ARROW_HEIGHT,ARROW_WIDTH))
         leftArrow = pygame.transform.rotate(leftArrow, 90)
         WIN.blit(leftArrow, (175, 200))
 
-        rightArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        rightArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_right]),(ARROW_HEIGHT,ARROW_WIDTH))
         rightArrow = pygame.transform.rotate(rightArrow, 270)
         WIN.blit(rightArrow, (325, 200))
 
-        downArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        downArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_down]),(ARROW_HEIGHT,ARROW_WIDTH))
         downArrow = pygame.transform.rotate(downArrow, 180)
         WIN.blit(downArrow, (475, 200))
 
@@ -87,7 +89,8 @@ run = True
 while run:
 
      clock.tick(FPS)
-     active_frame, count = update_arrow(mode, count)
+     active_frame_up, count = update_arrow(mode, count)
+     
 
 
      for event in pygame.event.get():
