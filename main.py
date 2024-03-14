@@ -19,7 +19,7 @@ ARROW_HEIGHT, ARROW_WIDTH = 96,96
 
 #set up the images
 
-frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png','Assets/pink_arrow']
+frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png','Assets/pink_arrow.png']
 active_frame = 0
 mode = 0
 count = 0
@@ -69,6 +69,11 @@ def update_arrow(mod, counter):
                act = 3
           if counter >= 59:
                act = 0
+     if mod == 4:
+          if counter < 59:
+               act = 4
+          if counter >= 59:
+               act = 0
      counter += 1
      return act, counter
 
@@ -97,7 +102,7 @@ while run:
      if keys_pressed[pygame.K_LEFT]: #Left Arrow
            mode = 3
      if keys_pressed[pygame.K_RIGHT]: #Right Arrow
-          mode = 1
+          mode = 4
      if event.type == pygame.KEYUP:
           mode = 0
 
