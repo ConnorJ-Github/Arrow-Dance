@@ -1,8 +1,11 @@
 import pygame
 import os
 
+#set up the display
 WIDTH, HEIGHT = 600, 500
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
+
+#set up the tab name
 pygame.display.set_caption("Arrow-Dance")
 
 #The background colour of the window
@@ -35,47 +38,89 @@ GREEN_ARROW_IMAGE = pygame.image.load(os.path.join('Assets', 'green_arrow.png'))
 GREEN_ARROW = pygame.transform.scale(GREEN_ARROW_IMAGE, (ARROW_HEIGHT,ARROW_WIDTH))
 
 
+frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png']
+active_frame = 0
+mode = 0
+count = 0
+
+
 #draws the window & content
-def draw_window(up_arrow, down_arrow, left_arrow, right_arrow): 
+def draw_window(): 
         WIN.fill(BACKGROUND_CLR)
-        WIN.blit(UP_ARROW,(up_arrow.x,up_arrow.y))
-        WIN.blit(LEFT_ARROW,(left_arrow.x,left_arrow.y))
-        WIN.blit(RIGHT_ARROW,(right_arrow.x,right_arrow.y))
-        WIN.blit(DOWN_ARROW,(down_arrow.x,down_arrow.y))
+
+        upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        WIN.blit(upArrow, (25, 200))
+
+        leftArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        leftArrow = pygame.transform.rotate(leftArrow, 90)
+        WIN.blit(leftArrow, (175, 200))
+
+        rightArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        rightArrow = pygame.transform.rotate(rightArrow, 270)
+        WIN.blit(rightArrow, (325, 200))
+
+        downArrow = pygame.transform.scale(pygame.image.load(frames[active_frame]),(ARROW_HEIGHT,ARROW_WIDTH))
+        downArrow = pygame.transform.rotate(downArrow, 180)
+        WIN.blit(downArrow, (475, 200))
+
         pygame.display.update()
+
+
+#Changing "image"
+def update_arrow(mod, counter):
+
+     act = 0
+
+     if counter >= 60:
+          counter = 0
+     if mod == 1:
+          if counter < 59:
+               act = 1
+          if counter >= 59:
+               act = 0
+     if mod == 2:
+          if counter < 59:
+               act = 2
+          if counter >= 59:
+               act = 0
+     if mod == 3:
+          if counter < 59:
+               act = 3
+          if counter >= 59:
+               act = 0
+     counter += 1
+     return act, counter
 
 
 #Handles functions & other operations
         
-def main():
-    up_arrow = pygame.Rect(25,200, ARROW_HEIGHT, ARROW_WIDTH)
-    left_arrow = pygame.Rect(175,200, ARROW_HEIGHT,ARROW_WIDTH)
-    right_arrow = pygame.Rect(325,200, ARROW_WIDTH,ARROW_HEIGHT)
-    down_arrow = pygame.Rect(475,200, ARROW_HEIGHT,ARROW_WIDTH)
 
-    clock = pygame.time.Clock()
+clock = pygame.time.Clock()
+    
+run = True
+while run:
 
-    run = True
-    while run:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+     clock.tick(FPS)
+     active_frame, count = update_arrow(mode, count)
+
+
+     for event in pygame.event.get():
+          if event.type == pygame.QUIT:
+               run = False
         
-        keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[pygame.K_DOWN]: #Down arrow
-             down_arrow.y += 1
-        if keys_pressed[pygame.K_UP]: #Up arrow
-             up_arrow.y += 1
-        if keys_pressed[pygame.K_LEFT]: #Left Arrow
-             left_arrow.y += 1
-        if keys_pressed[pygame.K_RIGHT]: #Right Arrow
-             right_arrow.y += 1
+     keys_pressed = pygame.key.get_pressed()
+     if keys_pressed[pygame.K_DOWN]: #Down arrow
+          mode = 1
+     if keys_pressed[pygame.K_UP]: #Up arrow
+           mode = 2
+     if keys_pressed[pygame.K_LEFT]: #Left Arrow
+           mode = 3
+     if keys_pressed[pygame.K_RIGHT]: #Right Arrow
+          mode = 1
+     if event.type == pygame.KEYUP:
+          mode = 0
 
-        draw_window(up_arrow, down_arrow,left_arrow,right_arrow)
+     draw_window()
 
 
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()
+pygame.quit()
