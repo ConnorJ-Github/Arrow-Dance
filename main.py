@@ -81,7 +81,16 @@ def player_score(score):
 
 
 #Game interaction
-def draw_sequence(): #replace with a class
+def draw_sequence(): #maybe try using a class?
+
+     #to do
+
+     #create an array ["up","down","left","right"]
+     #have the array order randomly change
+     #use that as the current sequence.
+     #display the sequence to the display.
+
+
 
      image = "Assets/default_arrow.png"
      rotation = [0,90,180,270]
