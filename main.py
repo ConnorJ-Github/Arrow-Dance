@@ -1,5 +1,8 @@
 import pygame
+import os
+import sys
 
+pygame.init()
 
 #set up the display
 WIDTH, HEIGHT = 600, 500
@@ -10,6 +13,14 @@ pygame.display.set_caption("Arrow-Dance")
 
 #The background colour of the window
 BACKGROUND_CLR = (255,255,255)
+
+
+#Colours
+BLACK = (0,0,0)
+
+#Font
+
+font = pygame.font.Font('Silkscreen-Regular.ttf',25)
 
 #Limits the FPS to 60
 FPS = 60
@@ -24,6 +35,9 @@ active_frame_up, active_frame_down, active_frame_right, active_frame_left = 0, 0
 mode, mode1, mode2, mode3 = 0, 0, 0, 0
 count = 0
 
+#player score
+
+score = 0
 
 #draws the window & content
 def draw_window(): 
@@ -44,8 +58,14 @@ def draw_window():
         downArrow = pygame.transform.rotate(downArrow, 180)
         WIN.blit(downArrow, (475, 200))
 
+        player_score(score)
+
         pygame.display.update()
 
+
+def player_score(score):
+     score_text = font.render(f'Score: {score}', True, BLACK)
+     WIN.blit(score_text, (0,0))
 
 #Changing "image"
 def update_arrow(mod, counter):
