@@ -19,26 +19,7 @@ ARROW_HEIGHT, ARROW_WIDTH = 96,96
 
 #set up the images
 
-DEFAULT_ARROW_IMAGE = pygame.image.load(os.path.join('Assets', 'default_arrow.png'))
-DEFAULT_ARROW = pygame.transform.scale(DEFAULT_ARROW_IMAGE, (ARROW_HEIGHT,ARROW_WIDTH))
-
-UP_ARROW = pygame.transform.rotate(DEFAULT_ARROW, 0)
-LEFT_ARROW = pygame.transform.rotate(DEFAULT_ARROW, 90)
-RIGHT_ARROW = pygame.transform.rotate(DEFAULT_ARROW, 270)
-DOWN_ARROW = pygame.transform.rotate(DEFAULT_ARROW, 180)
-
-
-RED_ARROW_IMAGE = pygame.image.load(os.path.join('Assets', 'red_arrow.png'))
-RED_ARROW = pygame.transform.scale(RED_ARROW_IMAGE, (ARROW_HEIGHT,ARROW_WIDTH))
-
-BLUE_ARROW_IMAGE = pygame.image.load(os.path.join('Assets', 'blue_arrow.png'))
-BLUE_ARROW = pygame.transform.scale(BLUE_ARROW_IMAGE, (ARROW_HEIGHT,ARROW_WIDTH))
-
-GREEN_ARROW_IMAGE = pygame.image.load(os.path.join('Assets', 'green_arrow.png'))
-GREEN_ARROW = pygame.transform.scale(GREEN_ARROW_IMAGE, (ARROW_HEIGHT,ARROW_WIDTH))
-
-
-frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png']
+frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arrow.png', 'Assets/red_arrow.png','Assets/pink_arrow']
 active_frame = 0
 mode = 0
 count = 0
