@@ -64,7 +64,7 @@ def draw_window():
 
         player_score(score)
         player_life(life)
-        create_sequence()
+        draw_sequence()
 
         pygame.display.update()
 
@@ -81,7 +81,7 @@ def player_score(score):
 
 
 #Game interaction
-def create_sequence(): #replace with a class
+def draw_sequence(): #replace with a class
 
      image = "Assets/default_arrow.png"
      rotation = [0,90,180,270]
@@ -101,10 +101,6 @@ def create_sequence(): #replace with a class
      sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
      sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
      WIN.blit(sequence_four, (350,100))
-
-     current_sequence = []
-
-     return current_sequence
 
 
 def random_action():
