@@ -241,7 +241,6 @@ def draw_window():
 
 #Handles functions & other operations
         
-
 clock = pygame.time.Clock()
     
 run = True
@@ -256,7 +255,7 @@ while run:
      for event in pygame.event.get():
           if event.type == pygame.QUIT:
                run = False
-        
+     
      keys_pressed = pygame.key.get_pressed()
      if keys_pressed[pygame.K_UP]: #UP arrow
           mode = 1
