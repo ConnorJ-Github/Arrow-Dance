@@ -39,8 +39,8 @@ life = 3
 
 #player life
 def player_life(life):
-     score_text = font.render(f'Lives: {life}', True, BLACK)
-     WIN.blit(score_text, (475,0))
+     life_text = font.render(f'Lives: {life}', True, BLACK)
+     WIN.blit(life_text, (475,0))
 
 #player score
 def player_score(score):
@@ -57,8 +57,34 @@ def create_sequence():
 #runs the create sequence function.
 create_sequence()
 
-
+user_Sequence = []
 #check if user input matches the sequence.
+def userinput_Sequence(userinput):
+
+     user_Sequence.append(userinput)
+     length = len(user_Sequence)
+
+     if length == 3:
+          match_userSequence(user_Sequence)
+     elif length > 3:
+          user_Sequence.clear()
+
+
+def match_userSequence(sequence):
+
+     global score
+     global life
+
+     if(sequence) == default_sequence:
+          score += 1
+          match_text = font.render('Pair Matched!', True, BLACK)
+          WIN.blit(match_text, (475,0))
+     else:
+          life -= 1
+
+     
+
+
 
 
 #match sequence with user input
@@ -183,7 +209,6 @@ def update_arrow(mod, counter):
 #draws the window & content
 def draw_window():
 
-        levels = 0; 
         WIN.fill(BACKGROUND_CLR)
 
         upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_up]),(ARROW_HEIGHT,ARROW_WIDTH))
@@ -235,12 +260,18 @@ while run:
      keys_pressed = pygame.key.get_pressed()
      if keys_pressed[pygame.K_UP]: #UP arrow
           mode = 1
+          userinput_Sequence("UP")
      if keys_pressed[pygame.K_DOWN]: #DOWN arrow
            mode1 = 2
+           userinput_Sequence("DOWN")
      if keys_pressed[pygame.K_LEFT]: #Left Arrow
            mode2 = 3
+           userinput_Sequence("LEFT")
      if keys_pressed[pygame.K_RIGHT]: #Right Arrow
           mode3 = 4
+          userinput_Sequence("RIGHT")
+     if keys_pressed[pygame.K_SPACE]: #space temp solution to generate new solutions quickly. 
+          create_sequence()
      if event.type == pygame.KEYUP:
           mode = 0
           mode1 = 0
