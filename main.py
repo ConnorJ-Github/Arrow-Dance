@@ -54,28 +54,22 @@ def create_sequence():
      default_sequence = ["UP","DOWN","LEFT","RIGHT"]
      random.shuffle(default_sequence)
 
-#runs the required function.
+#runs the create sequence function.
 create_sequence()
+
+
+#check if user input matches the sequence.
+
 
 #match sequence with user input
 
-#draw the current sequence
+#draw the current sequence #needs improving "some day"
 def draw_sequence(): #maybe try using a class?
-
-
-     # Outputs the text
-     # x_axis = 150
-
-     # for i in range(4):
-     #      sequence_text = font.render(default_sequence[i], True, BLACK)
-     #      WIN.blit(sequence_text, (x_axis,100))
-     #      x_axis += 100
-
-     #To Do
-     #Ensure the order is maintained when outputting as images.
 
      image = "Assets/default_arrow.png"
      rotation = [0,90,180,270]
+
+     #I know this code is awful, pygame was giving me weird errors the better way  https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
      for i in range(len(default_sequence)):
           if default_sequence[0] == "UP":
