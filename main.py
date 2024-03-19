@@ -268,8 +268,8 @@ def draw_window():
                end_text = font.render('Out of Lives', True, WHITE)
                WIN.blit(end_text, (200,150))
 
-               restart_text = font.render('Press "Q" to Quit', True, WHITE)
-               WIN.blit(restart_text, (130,200))
+               quit_text = font.render('Press "Q" to Quit', True, WHITE)
+               WIN.blit(quit_text, (130,200))
 
 
         pygame.display.update()
