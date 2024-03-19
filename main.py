@@ -45,6 +45,10 @@ life = 3
 #user sequence
 user_Sequence = []
 
+#Sequence matched
+matched = False
+not_matched = False
+
 
 #player life
 def player_life(life):
@@ -66,7 +70,9 @@ def create_sequence():
 
 #runs the create sequence function.
 create_sequence()
-#check if user input matches the sequence.
+
+
+#creates a user sequence list base on user input
 def userinput_Sequence(userinput):
 
      user_Sequence.append(userinput)
@@ -77,18 +83,17 @@ def userinput_Sequence(userinput):
      if length == 4:
           match_userSequence(user_Sequence)
 
-matched = False
-not_matched = False
 
-
+#Checks the user sequence to see if it is a match.
 def match_userSequence(sequence):
 
      global score
      global life
      global matched, not_matched
 
-     print("Current Sequence", default_sequence)
-     print("User Sequence", sequence)
+     #debug
+     #print("Current Sequence", default_sequence)
+     #print("User Sequence", sequence)
 
      if sequence == default_sequence:
           score += 1
@@ -97,19 +102,22 @@ def match_userSequence(sequence):
           life -= 1
           not_matched = True
 
-     
+
+#reset after sequence match or fail
+
+def next_sequence():
+     global matched,not_matched, trigger1,trigger2,trigger3,trigger4
+     matched, not_matched = False, False
+     trigger1,trigger2,trigger3,trigger4 = 0, 0, 0, 0
+     create_sequence()
 
 
 
-#match sequence with user input
-
-#draw the current sequence #needs improving "some day"
-def draw_sequence(): #maybe try using a class?
+#draw the current sequence 
+def draw_sequence():
 
      image = "Assets/default_arrow.png"
      rotation = [0,90,180,270] #0 = Up , 1 = Left, 2 = Down, 3 = Right
-
-     #I know this code is awful, pygame was giving me weird errors the better way  https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
      for i in range(len(default_sequence)):
 
@@ -190,8 +198,7 @@ def draw_sequence(): #maybe try using a class?
 
 
 
-
-#Changing "image"
+#Changing "image" 
 def update_arrow(mod, counter):
 
      act = 0
@@ -267,13 +274,6 @@ def draw_window():
 
         pygame.display.update()
 
-#reset after sequence match or fail
-
-def next_sequence():
-     global matched,not_matched, trigger1,trigger2,trigger3,trigger4
-     matched, not_matched = False, False
-     trigger1,trigger2,trigger3,trigger4 = 0, 0, 0, 0
-     create_sequence()
 
 #Handles functions & other operations
 up,down,left,right = False,False,False,False
