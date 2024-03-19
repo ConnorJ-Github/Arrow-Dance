@@ -42,6 +42,9 @@ incorrect_sfx = pygame.mixer.Sound('Assets/incorrect_ding.mp3')
 score = 0
 life = 3
 
+#user sequence
+user_Sequence = []
+
 
 #player life
 def player_life(life):
@@ -59,18 +62,17 @@ def create_sequence():
      global default_sequence
      default_sequence = ["UP","DOWN","LEFT","RIGHT"]
      random.shuffle(default_sequence)
+     user_Sequence.clear()
 
 #runs the create sequence function.
 create_sequence()
-
-user_Sequence = []
 #check if user input matches the sequence.
 def userinput_Sequence(userinput):
 
      user_Sequence.append(userinput)
      length = len(user_Sequence)
 
-     print(user_Sequence)
+     print("user sequence bug", user_Sequence)
 
      if length == 4:
           match_userSequence(user_Sequence)
@@ -250,8 +252,6 @@ def draw_window():
         header_text = font.render('Match the Sequence', True, BLACK)
         WIN.blit(header_text, (140,50))
 
-        global trigger1,trigger2,trigger3,trigger4, matched
-
         player_score(score)
         player_life(life)
         draw_sequence()
@@ -270,7 +270,6 @@ def next_sequence():
      global matched,not_matched, trigger1,trigger2,trigger3,trigger4
      matched, not_matched = False, False
      trigger1,trigger2,trigger3,trigger4 = 0, 0, 0, 0
-     user_Sequence.clear()
      create_sequence()
 
 #Handles functions & other operations
@@ -318,7 +317,6 @@ while run:
 
           if event.type == pygame.KEYUP:
                mode, mode1, mode2, mode3 = 0, 0, 0, 0
-               up, left, right, down = False, False,False, False
 
      if up == True and trigger1 == 0:
           userinput_Sequence("UP")
@@ -340,10 +338,13 @@ while run:
      if matched == True:
           correct_sfx.play()
           next_sequence()
+          up, left, right, down = False, False, False, False
      
      if not_matched == True:
           incorrect_sfx.play()
           next_sequence()
+          up, left, right, down = False, False, False, False
+
 
 
      draw_window()
