@@ -33,6 +33,10 @@ active_frame_up, active_frame_down, active_frame_right, active_frame_left = 0, 0
 mode, mode1, mode2, mode3 = 0, 0, 0, 0
 count = 0
 
+
+background_image = pygame.image.load('Assets/Background-image.png')
+#background_image = pygame.transform.scale(background_image, (600,500))
+
 #sound effects
 
 correct_sfx = pygame.mixer.Sound('Assets/correct_ding.mp3')
@@ -240,6 +244,7 @@ def draw_window():
         
 
         WIN.fill(BACKGROUND_CLR)
+        #WIN.blit(background_image, (0,0))
 
         upArrow = pygame.transform.scale(pygame.image.load(frames[active_frame_up]),(ARROW_HEIGHT,ARROW_WIDTH))
         WIN.blit(upArrow, (25, 200))
