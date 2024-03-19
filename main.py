@@ -75,7 +75,9 @@ def match_userSequence(sequence):
      global score
      global life
 
-     if(sequence) == default_sequence:
+     print(default_sequence)
+
+     if sequence == default_sequence:
           score += 1
           match_text = font.render('Pair Matched!', True, BLACK)
           WIN.blit(match_text, (475,0))
@@ -86,85 +88,92 @@ def match_userSequence(sequence):
 
 
 
-
 #match sequence with user input
 
 #draw the current sequence #needs improving "some day"
 def draw_sequence(): #maybe try using a class?
 
      image = "Assets/default_arrow.png"
-     rotation = [0,90,180,270]
+     rotation = [0,90,180,270] #0 = Up , 1 = Left, 2 = Down, 3 = Right
 
      #I know this code is awful, pygame was giving me weird errors the better way  https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
      for i in range(len(default_sequence)):
-          if default_sequence[0] == "UP":
-               sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_one = pygame.transform.rotate(sequence_one, rotation[0])
-               WIN.blit(sequence_one, (200,100))
-          if default_sequence[0] == "LEFT":
-               sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_one = pygame.transform.rotate(sequence_one, rotation[2])
-               WIN.blit(sequence_one, (200,100))
-          if default_sequence[0] == "RIGHT":
-               sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_one = pygame.transform.rotate(sequence_one, rotation[1])
-               WIN.blit(sequence_one, (200,100))
-          if default_sequence[0] == "DOWN":
-               sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_one = pygame.transform.rotate(sequence_one, rotation[3])
-               WIN.blit(sequence_one, (200,100))
 
-          if default_sequence[1] == "UP":
-               sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_two = pygame.transform.rotate(sequence_two, rotation[0])
-               WIN.blit(sequence_two, (250,100))
-          if default_sequence[1] == "LEFT":
-               sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_two = pygame.transform.rotate(sequence_two, rotation[2])
-               WIN.blit(sequence_two, (250,100))
-          if default_sequence[1] == "RIGHT":
-               sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_two = pygame.transform.rotate(sequence_two, rotation[1])
-               WIN.blit(sequence_two, (250,100))
-          if default_sequence[1] == "DOWN":
-               sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_two = pygame.transform.rotate(sequence_two, rotation[3])
-               WIN.blit(sequence_two, (250,100))
+          match default_sequence[0]:
+               case "UP":
+                    sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_one = pygame.transform.rotate(sequence_one, rotation[0])
+                    WIN.blit(sequence_one, (200,100))
+               case "LEFT":
+                    sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_one = pygame.transform.rotate(sequence_one, rotation[1])
+                    WIN.blit(sequence_one, (200,100))
+               case "RIGHT":
+                    sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_one = pygame.transform.rotate(sequence_one, rotation[3])
+                    WIN.blit(sequence_one, (200,100))
+               case "DOWN":
+                    sequence_one = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_one = pygame.transform.rotate(sequence_one, rotation[2])
+                    WIN.blit(sequence_one, (200,100))
 
-          if default_sequence[2] == "UP":
-               sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_three = pygame.transform.rotate(sequence_three, rotation[0])
-               WIN.blit(sequence_three, (300,100))
-          if default_sequence[2] == "LEFT":
-               sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_three = pygame.transform.rotate(sequence_three, rotation[2])
-               WIN.blit(sequence_three, (300,100))
-          if default_sequence[2] == "RIGHT":
-               sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_three = pygame.transform.rotate(sequence_three, rotation[1])
-               WIN.blit(sequence_three, (300,100))
-          if default_sequence[2] == "DOWN":
-               sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_three = pygame.transform.rotate(sequence_three, rotation[3])
-               WIN.blit(sequence_three, (300,100))
+
+          match default_sequence[1]:
+               case "UP":
+                    sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_two = pygame.transform.rotate(sequence_two, rotation[0])
+                    WIN.blit(sequence_two, (250,100))
+               case "LEFT":
+                    sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_two = pygame.transform.rotate(sequence_two, rotation[1])
+                    WIN.blit(sequence_two, (250,100))
+               case "RIGHT":
+                    sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_two = pygame.transform.rotate(sequence_two, rotation[3])
+                    WIN.blit(sequence_two, (250,100))
+               case "DOWN":
+                    sequence_two = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_two = pygame.transform.rotate(sequence_two, rotation[2])
+                    WIN.blit(sequence_two, (250,100))
+
+          match default_sequence[2]:
+               case "UP":
+                    sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_three = pygame.transform.rotate(sequence_three, rotation[0])
+                    WIN.blit(sequence_three, (300,100))
+               case "LEFT":
+                    sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_three = pygame.transform.rotate(sequence_three, rotation[1])
+                    WIN.blit(sequence_three, (300,100))
+               case "RIGHT":
+                    sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_three = pygame.transform.rotate(sequence_three, rotation[3])
+                    WIN.blit(sequence_three, (300,100))
+               case "DOWN":
+                    sequence_three = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_three = pygame.transform.rotate(sequence_three, rotation[2])
+                    WIN.blit(sequence_three, (300,100))
+
+
+          match default_sequence[3]:
+               case "UP":
+                    sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_four = pygame.transform.rotate(sequence_four, rotation[0])
+                    WIN.blit(sequence_four, (350,100))
+               case "LEFT":
+                    sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
+                    WIN.blit(sequence_four, (350,100))
+               case "RIGHT":
+                    sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_four = pygame.transform.rotate(sequence_four, rotation[3])
+                    WIN.blit(sequence_four, (350,100))
+               case "DOWN":
+                    sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
+                    sequence_four = pygame.transform.rotate(sequence_four, rotation[2])
+                    WIN.blit(sequence_four, (350,100))
           
-          if default_sequence[3] == "UP":
-               sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_four = pygame.transform.rotate(sequence_four, rotation[0])
-               WIN.blit(sequence_four, (350,100))
-          if default_sequence[3] == "LEFT":
-               sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_four = pygame.transform.rotate(sequence_four, rotation[2])
-               WIN.blit(sequence_four, (350,100))
-          if default_sequence[3] == "RIGHT":
-               sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_four = pygame.transform.rotate(sequence_four, rotation[1])
-               WIN.blit(sequence_four, (350,100))
-          if default_sequence[3] == "DOWN":
-               sequence_four = pygame.transform.scale(pygame.image.load(image), (50,50))
-               sequence_four = pygame.transform.rotate(sequence_four, rotation[3])
-               WIN.blit(sequence_four, (350,100))
 
 
 
@@ -239,12 +248,17 @@ def draw_window():
         pygame.display.update()
 
 
+
 #Handles functions & other operations
         
+
+pygame.key.get_repeat()
 clock = pygame.time.Clock()
-    
+
 run = True
 while run:
+
+     pygame.key.set_repeat()
 
      clock.tick(FPS)
      active_frame_up, count = update_arrow(mode, count)
