@@ -261,6 +261,9 @@ def draw_window():
                end_text = font.render('Out of Lives', True, WHITE)
                WIN.blit(end_text, (200,150))
 
+               restart_text = font.render('Press "Q" to Quit', True, WHITE)
+               WIN.blit(restart_text, (130,200))
+
 
         pygame.display.update()
 
@@ -314,6 +317,8 @@ while run:
                     #userinput_Sequence("RIGHT")
                if event.key == pygame.K_SPACE: #space temp solution to generate new solutions quickly. 
                     create_sequence()
+               if event.key == pygame.K_q:
+                    pygame.Quit()
 
           if event.type == pygame.KEYUP:
                mode, mode1, mode2, mode3 = 0, 0, 0, 0
