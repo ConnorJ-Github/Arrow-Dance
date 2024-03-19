@@ -2,7 +2,7 @@
 
 Enter the correct input to gain points.
 
-![NVIDIA_Share_CdGNuFtFQ7](https://github.com/ConnorJ-Github/Arrow-Dance/assets/149539076/8f3b6d80-32d5-424e-818e-ac899a42416c)
+![NVIDIA_Share_Ux5YYwgAwF](https://github.com/ConnorJ-Github/Arrow-Dance/assets/149539076/09264c7d-ce3e-4ca3-9bc0-e11acfb7e200)
 
 Functionality
 
@@ -14,4 +14,4 @@ Functionality
   
 - Out of Lives Screen
 
-- Draw & Create new sequence when match or fail
+- Draw & Create new sequence when match or fail (Space bar also generates new sequence)
