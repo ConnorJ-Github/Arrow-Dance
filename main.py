@@ -16,6 +16,7 @@ BACKGROUND_CLR = (255,255,255)
 
 #Colours
 BLACK = (0,0,0)
+WHITE = (255,255,255)
 
 #Font
 font = pygame.font.Font('Silkscreen-Regular.ttf',25)
@@ -31,6 +32,11 @@ frames = ['Assets/default_arrow.png','Assets/green_arrow.png', 'Assets/blue_arro
 active_frame_up, active_frame_down, active_frame_right, active_frame_left = 0, 0, 0, 0
 mode, mode1, mode2, mode3 = 0, 0, 0, 0
 count = 0
+
+#sound effects
+
+correct_sfx = pygame.mixer.Sound('Assets/correct_ding.mp3')
+incorrect_sfx = pygame.mixer.Sound('Assets/incorrect_ding.mp3')
 
 #player score & lives
 score = 0
@@ -68,16 +74,16 @@ def userinput_Sequence(userinput):
 
      if length == 4:
           match_userSequence(user_Sequence)
-     elif length > 4:
-          user_Sequence.clear()
 
 matched = False
+not_matched = False
+
 
 def match_userSequence(sequence):
 
      global score
      global life
-     global matched
+     global matched, not_matched
 
      print("Current Sequence", default_sequence)
      print("User Sequence", sequence)
@@ -87,6 +93,7 @@ def match_userSequence(sequence):
           matched = True
      else:
           life -= 1
+          not_matched = True
 
      
 
@@ -221,6 +228,7 @@ def update_arrow(mod, counter):
 
 #draws the window & content
 def draw_window():
+        
 
         WIN.fill(BACKGROUND_CLR)
 
@@ -242,20 +250,28 @@ def draw_window():
         header_text = font.render('Match the Sequence', True, BLACK)
         WIN.blit(header_text, (140,50))
 
-        if matched == True:
-               match_text = font.render('Pair Matched!', True, BLACK)
-               WIN.blit(match_text, (190,160))
+        global trigger1,trigger2,trigger3,trigger4, matched
 
         player_score(score)
         player_life(life)
-
-        #controls if the sequence is drawn
-
         draw_sequence()
+
+        if life == 0:
+               WIN.fill(BLACK)
+               end_text = font.render('Out of Lives', True, WHITE)
+               WIN.blit(end_text, (200,150))
+
 
         pygame.display.update()
 
+#reset after sequence match or fail
 
+def next_sequence():
+     global matched,not_matched, trigger1,trigger2,trigger3,trigger4
+     matched, not_matched = False, False
+     trigger1,trigger2,trigger3,trigger4 = 0, 0, 0, 0
+     user_Sequence.clear()
+     create_sequence()
 
 #Handles functions & other operations
 up,down,left,right = False,False,False,False
@@ -319,6 +335,15 @@ while run:
      if right == True and trigger4 == 0:
           userinput_Sequence("RIGHT")
           trigger4 += 1
+
+
+     if matched == True:
+          correct_sfx.play()
+          next_sequence()
+     
+     if not_matched == True:
+          incorrect_sfx.play()
+          next_sequence()
 
 
      draw_window()
