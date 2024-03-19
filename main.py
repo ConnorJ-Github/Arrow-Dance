@@ -64,23 +64,27 @@ def userinput_Sequence(userinput):
      user_Sequence.append(userinput)
      length = len(user_Sequence)
 
-     if length == 3:
+     print(user_Sequence)
+
+     if length == 4:
           match_userSequence(user_Sequence)
-     elif length > 3:
+     elif length > 4:
           user_Sequence.clear()
 
+matched = False
 
 def match_userSequence(sequence):
 
      global score
      global life
+     global matched
 
-     print(default_sequence)
+     print("Current Sequence", default_sequence)
+     print("User Sequence", sequence)
 
      if sequence == default_sequence:
           score += 1
-          match_text = font.render('Pair Matched!', True, BLACK)
-          WIN.blit(match_text, (475,0))
+          matched = True
      else:
           life -= 1
 
@@ -238,6 +242,10 @@ def draw_window():
         header_text = font.render('Match the Sequence', True, BLACK)
         WIN.blit(header_text, (140,50))
 
+        if matched == True:
+               match_text = font.render('Pair Matched!', True, BLACK)
+               WIN.blit(match_text, (190,160))
+
         player_score(score)
         player_life(life)
 
@@ -250,7 +258,8 @@ def draw_window():
 
 
 #Handles functions & other operations
-        
+up,down,left,right = False,False,False,False
+trigger1,trigger2,trigger3,trigger4 = 0, 0, 0, 0  
 
 pygame.key.get_repeat()
 clock = pygame.time.Clock()
@@ -270,26 +279,47 @@ while run:
           if event.type == pygame.QUIT:
                run = False
      
-     keys_pressed = pygame.key.get_pressed()
-     if keys_pressed[pygame.K_UP]: #UP arrow
-          mode = 1
+          if event.type == pygame.KEYDOWN:
+               if event.key == pygame.K_UP: #UP arrow
+                    print(event.key)
+                    mode = 1
+                    up = True
+                    #userinput_Sequence("UP")
+               if event.key == pygame.K_DOWN: #DOWN arrow
+                    mode1 = 2
+                    down = True
+                    #userinput_Sequence("DOWN")
+               if event.key == pygame.K_LEFT: #Left Arrow
+                    mode2 = 3
+                    left = True
+                    #userinput_Sequence("LEFT")
+               if event.key == pygame.K_RIGHT: #Right Arrow
+                    mode3 = 4
+                    right = True
+                    #userinput_Sequence("RIGHT")
+               if event.key == pygame.K_SPACE: #space temp solution to generate new solutions quickly. 
+                    create_sequence()
+
+          if event.type == pygame.KEYUP:
+               mode, mode1, mode2, mode3 = 0, 0, 0, 0
+               up, left, right, down = False, False,False, False
+
+     if up == True and trigger1 == 0:
           userinput_Sequence("UP")
-     if keys_pressed[pygame.K_DOWN]: #DOWN arrow
-           mode1 = 2
-           userinput_Sequence("DOWN")
-     if keys_pressed[pygame.K_LEFT]: #Left Arrow
-           mode2 = 3
-           userinput_Sequence("LEFT")
-     if keys_pressed[pygame.K_RIGHT]: #Right Arrow
-          mode3 = 4
+          trigger1 +=1
+     
+     if down == True and trigger2 == 0:
+          userinput_Sequence("DOWN")
+          trigger2 += 1
+
+     if left == True and trigger3 == 0:
+          userinput_Sequence("LEFT")
+          trigger3 += 1
+
+     if right == True and trigger4 == 0:
           userinput_Sequence("RIGHT")
-     if keys_pressed[pygame.K_SPACE]: #space temp solution to generate new solutions quickly. 
-          create_sequence()
-     if event.type == pygame.KEYUP:
-          mode = 0
-          mode1 = 0
-          mode2 = 0
-          mode3 = 0
+          trigger4 += 1
+
 
      draw_window()
 
