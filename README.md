@@ -2,7 +2,7 @@
 
 Requires Pygame + Python to run
 
-An introductary project to learn the Python syntax.
+An introductory project to learn the Python syntax.
 
 Enter the correct input to gain points.
 
