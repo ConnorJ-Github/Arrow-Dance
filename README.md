@@ -2,8 +2,6 @@
 
 Requires Pygame + Python to run
 
-An introductory project to learn the Python syntax.
-
 Enter the correct input to gain points.
 
 ![NVIDIA_Share_Ux5YYwgAwF](https://github.com/ConnorJ-Github/Arrow-Dance/assets/149539076/09264c7d-ce3e-4ca3-9bc0-e11acfb7e200)
