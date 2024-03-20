@@ -14,7 +14,7 @@ Input should be carried out using the Arrow Keys.
 
 If the sequence inputted is correct, points will be gained.
 
-If the sequence inputted in incorrect, lives are lost.
+If the sequence inputted in incorrectly, lives are lost.
 
 See how many points you can earn before losing all your lives.
 
